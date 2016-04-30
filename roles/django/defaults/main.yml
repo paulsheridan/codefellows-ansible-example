@@ -1,2 +1,3 @@
-django_home: /home/ubuntu/checkout
-rds_db_instance: uwpce
+django_home: /home/ubuntu/django_imager
+rds_db_instance: djangodb2
+repo_url: https://github.com/wohlfea/django_imager.git

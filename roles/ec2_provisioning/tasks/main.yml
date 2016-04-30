@@ -8,7 +8,7 @@
   register: ec2_pre_launch
 
 - name: calculate number of instances to provision
-  set_fact: 
+  set_fact:
     count: "{{ num_instances - ec2_pre_launch.instances|length }}"
 
 - name: Launch EC2 Instance
@@ -48,16 +48,14 @@
     module: ec2_lookup
     region: "{{ region }}"
     tags: "{{ instance_tags }}"
-  register: ec2_post_launch
+  register: "{{ ec2_post_launch }}"
 
 - name: Add new instance to host group
   local_action:
     module: add_host
     hostname: "{{ item.public_dns_name }}"
     groupname: launched
-  with_items: ec2_post_launch.instances
+  with_items: "{{ ec2_post_launch.instances }}"
 
 - name: debug
   debug: var=tag_Name_ansible-built
-
-
